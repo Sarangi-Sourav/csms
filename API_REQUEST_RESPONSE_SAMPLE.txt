@@ -1,0 +1,174 @@
+ WebSocket header:
+Sec-WebSocket-Protocol:ocpp1.6,ocpp2.0
+Authorization:SuperSecretKey123
+
+uri:ws://localhost:8089/ocpp1.6j/CHARIdG25 
+
+
+
+ BootNotification request:[2, "19223201", "BootNotification", {"chargePointVendor": "VendorX", "chargePointModel": "SingleSocketCharger"}]
+ BootNotification response: [
+    3,
+    "19223201", 
+    {
+        "status": "Accepted",
+        "currentTime": "2025-03-30T16:30:21.170973800Z",
+        "interval": 300
+    }
+]
+HeartbeatRequest: [2, "223", "HeartbeatRequest", {}]
+HeartbeatResponse: [
+    3,
+    "223",
+    {
+        "currentTime": "2025-03-30T16:31:29.694544700Z"
+    }
+]
+StatusNotificationRequest: [
+    2,
+    "12390",
+    "StatusNotificationRequest",
+    {
+        "connectorId": 1,
+        "errorCode": "NoError",
+        "status": "Charging",
+        "timestamp": "2024-03-30T12:34:56Z"
+    }
+]
+
+StatusNotificationResponse:[
+    3,
+    "12390"
+]
+
+RemoteStartTransactionRequest:[2,"89343","RemoteStartTransactionRequest",{
+  "connectorId": 1,
+  "idTag": "THA690",
+  "chargingProfile": {
+    "chargingProfileId": 2,
+    "transactionId": 200,
+    "stackLevel": 1,
+    "chargingProfilePurpose": "TxProfile",
+    "chargingProfileKind": "Absolute",
+    "recurrencyKind": "Daily",
+    "validFrom": "2023-03-01T12:00:00Z",
+    "validTo": "2023-03-01T14:00:00Z",
+    "chargingSchedule": {
+      "duration": 3600,
+      "startSchedule": "2023-03-01T12:00:00Z",
+      "chargingRateUnit": "W",
+      "chargingSchedulePeriod": [
+        {
+          "startPeriod": 0,
+          "limit": 10.0,
+          "numberPhases": 3
+        },
+        {
+          "startPeriod": 600,
+          "limit": 5.0
+        }
+      ],
+      "minChargingRate": 1.5
+    }
+  }
+}
+]
+RemoteStartTransactionResponse:
+[
+    3,
+    "89343",
+    {
+        "status": "Accepted",
+        "currentTime": "2025-03-30T16:33:04.012873700Z"
+    }
+]
+
+
+REST APIs:
+For Transaction logs by time range:
+POST: localhost:8089/transaction/logs-by-time
+request payload: {
+    "startTime":"03/29/2025",
+    "endTime":"03/30/2025"
+}
+response:
+{
+    "transactionDetails": [
+        {
+            "id": 1,
+            "idTag": "THA690",
+            "connectorId": 1,
+            "chargingProfile": {
+                "chargingProfileId": 2,
+                "transactionId": 200,
+                "stackLevel": 1,
+                "chargingProfilePurpose": "TxProfile",
+                "chargingProfileKind": "Absolute",
+                "recurrencyKind": "Daily",
+                "validFrom": "2023-03-01T12:00:00Z",
+                "validTo": "2023-03-01T14:00:00Z",
+                "chargingSchedule": {
+                    "duration": 3600,
+                    "startSchedule": "2023-03-01T12:00:00Z",
+                    "chargingRateUnit": "W",
+                    "chargingSchedulePeriod": [
+                        {
+                            "startPeriod": 0,
+                            "limit": 10.0,
+                            "numberPhases": 3
+                        },
+                        {
+                            "startPeriod": 600,
+                            "limit": 5.0
+                        }
+                    ],
+                    "minChargingRate": 1.5
+                }
+            },
+            "createdAt": "2025-03-30T01:11:42",
+            "chargerId": "CHARIdG25"
+        } 
+   ]
+}
+For Transaction logs by chagerId:
+GET: localhost:8089/transaction/logs-by-chargeid?chargerId=CHARIdG26
+response: 
+  {
+    "transactionDetails": [
+        {
+            "id": 4,
+            "idTag": "THA690",
+            "connectorId": 1,
+            "chargingProfile": {
+                "chargingProfileId": 2,
+                "transactionId": 200,
+                "stackLevel": 1,
+                "chargingProfilePurpose": "TxProfile",
+                "chargingProfileKind": "Absolute",
+                "recurrencyKind": "Daily",
+                "validFrom": "2023-03-01T12:00:00Z",
+                "validTo": "2023-03-01T14:00:00Z",
+                "chargingSchedule": {
+                    "duration": 3600,
+                    "startSchedule": "2023-03-01T12:00:00Z",
+                    "chargingRateUnit": "W",
+                    "chargingSchedulePeriod": [
+                        {
+                            "startPeriod": 0,
+                            "limit": 10.0,
+                            "numberPhases": 3
+                        },
+                        {
+                            "startPeriod": 600,
+                            "limit": 5.0
+                        }
+                    ],
+                    "minChargingRate": 1.5
+                }
+            },
+            "createdAt": "2025-03-30T19:45:36",
+            "chargerId": "CHARIdG26"
+        }
+    ]
+}
+
