@@ -1,3 +1,11 @@
+ WebSocket header:
+Sec-WebSocket-Protocol:ocpp1.6,ocpp2.0
+Authorization:SuperSecretKey123
+
+uri:ws://localhost:8089/ocpp1.6j/CHARIdG25 
+
+
+
  BootNotification request:[2, "19223201", "BootNotification", {"chargePointVendor": "VendorX", "chargePointModel": "SingleSocketCharger"}]
  BootNotification response: [
     3,
